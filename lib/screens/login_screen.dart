@@ -83,12 +83,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SizerUtil.orientation == Orientation.portrait
-        ? _widPortrait()
-        : _widLandScape();
-  }
-
-  Widget _widPortrait() {
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
@@ -117,33 +111,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _widLandScape() {
-    return Scaffold(
-      appBar: AppBar(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(2.h),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                // Center(child: _buildTextHello()),
-                _buildSpacer(6.h),
-                _buildLoginForm(),
-                _buildSpacer(1.h),
-                _buildRememberMeCheckBox(),
-                _buildSpacer(3.h),
-                _buildTextButton(),
-                _buildSpacer(3.h),
-                _buildTextRegister(),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget _buildTextHello() {
     return Column(
       children: [
@@ -154,12 +121,9 @@ class _LoginScreenState extends State<LoginScreen> {
               fontWeight: FontWeight.bold,
               color: Colors.black45),
         ),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Sign in to your account',
-            style: TextStyle(fontSize: 15.sp, color: Colors.black45),
-          ),
+        Text(
+          'Sign in to your account',
+          style: TextStyle(fontSize: 15.sp, color: Colors.black45),
         ),
       ],
     );
@@ -196,7 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
           obscureText: _obscureText,
           style: TextStyle(fontSize: 13.sp),
           decoration: inputDecorationForm(
-            const FittedBox(
+            FittedBox(
               child: Text(
                 'Password',
               ),

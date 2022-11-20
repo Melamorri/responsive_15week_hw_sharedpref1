@@ -71,6 +71,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
 
   Widget _buildTextFiledName() {
     return TextFormField(
+      style: TextStyle(fontSize: 12.sp),
       decoration: inputDecorationForm(
         Text('Your name', style: TextStyle(fontSize: 12.sp)),
       ),
@@ -86,6 +87,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
 
   Widget _buildTextFiledEmail() {
     return TextFormField(
+      style: TextStyle(fontSize: 12.sp),
       keyboardType: TextInputType.emailAddress,
       decoration: inputDecorationForm(
         Text('E-mail', style: TextStyle(fontSize: 12.sp)),
@@ -108,6 +110,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
     return Column(
       children: [
         TextFormField(
+          style: TextStyle(fontSize: 13.sp),
           obscureText: true,
           key: passwordFieldKey,
           decoration: inputDecorationForm(
@@ -124,6 +127,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
         ),
         _buildSpacer(1.h),
         TextFormField(
+          style: TextStyle(fontSize: 12.sp),
           obscureText: true,
           decoration: inputDecorationForm(
             Text('Repeat password', style: TextStyle(fontSize: 12.sp)),

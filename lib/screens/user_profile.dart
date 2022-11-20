@@ -39,6 +39,7 @@ class _UserProfileState extends State<UserProfile> {
 
   @override
   Widget build(BuildContext context) {
+    final orientationPortrait = SizerUtil.orientation == Orientation.portrait;
     return Scaffold(
       backgroundColor: const Color(0xFFC3DFF6),
       appBar: AppBar(
@@ -49,16 +50,16 @@ class _UserProfileState extends State<UserProfile> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: 20),
+            SizedBox(height: 2.h),
             Stack(
-              children: const [
+              children: [
                 CircleAvatar(
-                  radius: 93,
+                  radius: 12.h,
                   backgroundColor: Colors.blue,
                   child: CircleAvatar(
-                    backgroundImage: NetworkImage(
+                    backgroundImage: const NetworkImage(
                         'https://phonoteka.org/uploads/posts/2021-05/1621965253_31-phonoteka_org-p-kotiki-art-krasivo-32.jpg'),
-                    radius: 90,
+                    radius: 11.h,
                   ),
                 ),
                 Positioned(
@@ -66,8 +67,8 @@ class _UserProfileState extends State<UserProfile> {
                   top: 2,
                   child: CircleAvatar(
                     backgroundColor: Colors.white,
-                    radius: 25,
-                    child: Icon(
+                    radius: 3.h,
+                    child: const Icon(
                       Icons.create_rounded,
                       color: Colors.blue,
                     ),
@@ -75,80 +76,38 @@ class _UserProfileState extends State<UserProfile> {
                 )
               ],
             ),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: TextField(
-                controller: TextEditingController(text: name),
-                style: const TextStyle(fontSize: 20),
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  fillColor: Colors.white,
-                  filled: true,
-                  labelText: 'Name',
-                  suffixIcon: Icon(Icons.arrow_forward_ios),
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: TextField(
-                controller: TextEditingController(text: eMail),
-                style: const TextStyle(fontSize: 20),
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  fillColor: Colors.white,
-                  filled: true,
-                  labelText: 'E-mail',
-                  suffixIcon: Icon(Icons.arrow_forward_ios),
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: TextField(
-                controller: TextEditingController(),
-                maxLines: 5,
-                style: const TextStyle(fontSize: 20),
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  fillColor: Colors.white,
-                  filled: true,
-                  labelText: 'Tell us about yourself',
-                  suffixIcon: IconButton(
-                      onPressed: (() {
-                        setState(() {});
-                        TextEditingController().clear();
-                      }),
-                      icon: const Icon(Icons.close)),
-                ),
-              ),
-            ),
-            const SizedBox(height: 30),
-            // ListTile(
-            //   leading: Text('Name: $name'),
-            //   shape: const Border(
-            //     bottom: BorderSide(),
-            //   ),
-            //   trailing: const Icon(Icons.arrow_forward_ios),
-            // ),
-            // Text.rich(
-            //   textAlign: TextAlign.left,
-            //   TextSpan(
-            //     text: 'Name:    ',
-            //     style: const TextStyle(fontSize: 35),
-            //     children: <TextSpan>[
-            //       TextSpan(
-            //         text: '$name',
-            //         style: const TextStyle(
-            //           decoration: TextDecoration.underline,
+            SizedBox(height: 2.h),
+
+            // неработающий код. как заставить его работать? выдает ошибку, связанную с размерами, при запуске
+            // SizerUtil.deviceType == DeviceType.mobile
+            //     ? SizedBox(
+            //         width: 90.w,
+            //         child: Column(
+            //           children: [userNameField(), userEmailField()],
+            //         ),
+            //       )
+            //     : SizedBox(
+            //         width: 90.w,
+            //         child: Row(
+            //           children: [userNameField(), userEmailField()],
             //         ),
             //       ),
-            //     ],
-            //   ),
-            // ),
+
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 3.h),
+              child: userNameField(),
+            ),
+            // SizedBox(height: 10),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 3.h),
+              child: userEmailField(),
+            ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 3.h),
+              child: userDescriptionField(),
+            ),
+            SizedBox(height: 4.h),
             TextButtonClass(
               title: 'Exit',
               function: () {
@@ -160,5 +119,89 @@ class _UserProfileState extends State<UserProfile> {
         ),
       ),
     );
+  }
+
+  TextField userDescriptionField() {
+    return TextField(
+      controller: TextEditingController(),
+      maxLines: 5,
+      style: TextStyle(fontSize: 16.sp),
+      decoration: InputDecoration(
+        border: InputBorder.none,
+        fillColor: Colors.white,
+        filled: true,
+        labelText: 'Tell us about yourself',
+        suffixIcon: IconButton(
+            onPressed: (() {
+              setState(() {});
+              TextEditingController().clear();
+            }),
+            icon: const Icon(Icons.close)),
+      ),
+    );
+  }
+
+  Container userEmailField() {
+    final orientationPortrait = SizerUtil.orientation == Orientation.portrait;
+    return SizerUtil.deviceType == DeviceType.mobile
+        ? Container(
+            width: orientationPortrait ? 80.w : 70.w,
+            child: TextField(
+              controller: TextEditingController(text: eMail),
+              style: TextStyle(fontSize: 16.sp),
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                fillColor: Colors.white,
+                filled: true,
+                labelText: 'E-mail',
+                suffixIcon: Icon(Icons.arrow_forward_ios),
+              ),
+            ),
+          )
+        : Container(
+            width: orientationPortrait ? 80.w : 70.w,
+            child: TextField(
+              controller: TextEditingController(text: eMail),
+              style: TextStyle(fontSize: 13.sp),
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                fillColor: Colors.white,
+                filled: true,
+                labelText: 'E-mail',
+                suffixIcon: Icon(Icons.arrow_forward_ios),
+              ),
+            ),
+          );
+  }
+
+  Container userNameField() {
+    final orientationPortrait = SizerUtil.orientation == Orientation.portrait;
+    return SizerUtil.deviceType == DeviceType.mobile
+        ? Container(
+            child: TextField(
+              controller: TextEditingController(text: name),
+              style: TextStyle(fontSize: 16.sp),
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                fillColor: Colors.white,
+                filled: true,
+                labelText: 'Name',
+                suffixIcon: Icon(Icons.arrow_forward_ios),
+              ),
+            ),
+          )
+        : Container(
+            child: TextField(
+              controller: TextEditingController(text: name),
+              style: TextStyle(fontSize: 13.sp),
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                fillColor: Colors.white,
+                filled: true,
+                labelText: 'Name',
+                suffixIcon: Icon(Icons.arrow_forward_ios),
+              ),
+            ),
+          );
   }
 }

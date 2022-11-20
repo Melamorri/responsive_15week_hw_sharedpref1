@@ -21,12 +21,12 @@ class TextButtonClass extends StatelessWidget {
           fixedSize: MaterialStateProperty.all(
             SizerUtil.deviceType == DeviceType.mobile
                 ? (Size(90.w, 7.h))
-                : (Size(40.w, 7.h)),
+                : (Size(25.w, 6.h)),
           )),
       onPressed: () => function(),
       child: Text(
         title,
-        style: TextStyle(color: Colors.white, fontSize: 16.sp),
+        style: TextStyle(color: Colors.white, fontSize: 14.sp),
       ),
     );
   }
