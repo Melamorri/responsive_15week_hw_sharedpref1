@@ -92,14 +92,14 @@ class _UserProfileState extends State<UserProfile> {
             //           children: [userNameField(), userEmailField()],
             //         ),
             //       ),
-
+            userEmailField(),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 3.h),
               child: userNameField(),
             ),
             // SizedBox(height: 10),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 3.h),
+              padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 1.h),
               child: userEmailField(),
             ),
             const SizedBox(height: 10),
@@ -122,30 +122,49 @@ class _UserProfileState extends State<UserProfile> {
   }
 
   TextField userDescriptionField() {
-    return TextField(
-      controller: TextEditingController(),
-      maxLines: 5,
-      style: TextStyle(fontSize: 16.sp),
-      decoration: InputDecoration(
-        border: InputBorder.none,
-        fillColor: Colors.white,
-        filled: true,
-        labelText: 'Tell us about yourself',
-        suffixIcon: IconButton(
-            onPressed: (() {
-              setState(() {});
-              TextEditingController().clear();
-            }),
-            icon: const Icon(Icons.close)),
-      ),
-    );
+    final orientationPortrait = SizerUtil.orientation == Orientation.portrait;
+    return SizerUtil.deviceType == DeviceType.mobile
+        ? TextField(
+            controller: TextEditingController(),
+            maxLines: 5,
+            style: TextStyle(fontSize: 16.sp),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              fillColor: Colors.white,
+              filled: true,
+              labelText: 'Tell us about yourself',
+              suffixIcon: IconButton(
+                  onPressed: (() {
+                    setState(() {});
+                    TextEditingController().clear();
+                  }),
+                  icon: const Icon(Icons.close)),
+            ),
+          )
+        : TextField(
+            controller: TextEditingController(),
+            maxLines: 5,
+            style: TextStyle(fontSize: 16.sp),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              fillColor: Colors.white,
+              filled: true,
+              labelText: 'Tell us about yourself',
+              suffixIcon: IconButton(
+                  onPressed: (() {
+                    setState(() {});
+                    TextEditingController().clear();
+                  }),
+                  icon: const Icon(Icons.close)),
+            ),
+          );
   }
 
   Container userEmailField() {
     final orientationPortrait = SizerUtil.orientation == Orientation.portrait;
     return SizerUtil.deviceType == DeviceType.mobile
         ? Container(
-            width: orientationPortrait ? 80.w : 70.w,
+            width: orientationPortrait ? 150.w : 150.w,
             child: TextField(
               controller: TextEditingController(text: eMail),
               style: TextStyle(fontSize: 16.sp),
@@ -159,7 +178,7 @@ class _UserProfileState extends State<UserProfile> {
             ),
           )
         : Container(
-            width: orientationPortrait ? 80.w : 70.w,
+            width: orientationPortrait ? 80.w : 75.w,
             child: TextField(
               controller: TextEditingController(text: eMail),
               style: TextStyle(fontSize: 13.sp),
